@@ -13,7 +13,7 @@ exports.getAllUser = async (req, res) => {
 
 // create a new user
 exports.createNewUser = async(req,res)=>{
-  newUser = req.body;
+  const newUser = req.body;
   const existingUser = await userModel.findOne({email: newUser.email});
   if(existingUser){
     return res.status(400).json({message: "User already exists"})

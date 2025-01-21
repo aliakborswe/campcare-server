@@ -1,4 +1,4 @@
-import { mongoose, Schema } from "mongoose";
+const { mongoose, Schema } = require('mongoose')
 
 const CampSchema = new Schema(
   {
@@ -17,8 +17,12 @@ const CampSchema = new Schema(
       min: 0,
     },
     date: {
-      type: Date,
+      type: String,
       required: true,
+    },
+    time:{
+        type: String,
+        required: true,
     },
     location: {
       type: String,
