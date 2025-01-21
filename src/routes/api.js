@@ -19,6 +19,7 @@ router.get(
   checkPermission('admin'),
   userController.getAllUser
 );
+router.get("/users/:email",jwtVerifyMiddleware, userController.getUserByEmail);
 router.post("/users", userController.createNewUser);
 
 // admin routes
