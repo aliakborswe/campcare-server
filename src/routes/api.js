@@ -21,6 +21,7 @@ router.get(
 );
 router.get("/users/:email",jwtVerifyMiddleware, userController.getUserByEmail);
 router.post("/users", userController.createNewUser);
+router.put("/users/:id", jwtVerifyMiddleware, userController.updateUserById);
 
 // admin routes
 
