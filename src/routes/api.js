@@ -24,6 +24,7 @@ router.post("/users", userController.createNewUser);
 router.put("/users/:id", jwtVerifyMiddleware, userController.updateUserById);
 
 // camp routes
+router.get("/top-camps", campController.getTop6Camps);
 router.get("/camps/:id", campController.getCampById);
 router.get("/camps", campController.getAllCamp);
 router.post(

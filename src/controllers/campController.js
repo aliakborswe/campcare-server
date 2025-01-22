@@ -45,3 +45,17 @@ exports.getCampById = async (req, res) => {
   }
 
 }
+
+
+// GET camp to retrieve top 6 camps with highest participant count
+exports.getTop6Camps = async (_req, res) => {
+  try {
+    const camps = await campModel
+      .find()
+      .sort({ participantCount: -1 })
+      .limit(6);
+    res.status(200).json(camps);
+  } catch (err) {
+    res.status(404).json({ error: err.message });
+  }
+};
