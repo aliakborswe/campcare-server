@@ -5,6 +5,7 @@ const jwtVerifyMiddleware = require("../middlewares/jwtVerifyMiddleware");
 const checkPermission = require("../middlewares/checkPermission");
 const userRoleController = require("../controllers/getUserRole");
 const campController = require("../controllers/campController");
+const participantController = require("../controllers/participantController");
 
 // auth routes
 router.post("/jwt", loginController.login);
@@ -32,6 +33,13 @@ router.post(
   jwtVerifyMiddleware,
   checkPermission("admin"),
   campController.createCamp
+);
+
+// participant routes
+router.post(
+  "/participants",
+  jwtVerifyMiddleware,
+  participantController.createNewParticipant
 );
 
 module.exports = router;

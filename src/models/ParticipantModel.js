@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 
 const ParticipantSchema = new mongoose.Schema(
   {
+    campId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "camps",
+    },
     participantName: {
       type: String,
       required: true,
@@ -15,7 +20,7 @@ const ParticipantSchema = new mongoose.Schema(
       trim: true,
     },
     age: {
-      type: Number,
+      type: String,
       required: true,
     },
     phoneNumber: {
