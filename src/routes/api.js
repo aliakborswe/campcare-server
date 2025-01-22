@@ -16,7 +16,7 @@ router.get("/role", jwtVerifyMiddleware, userRoleController.getUserRole);
 router.get(
   "/users",
   jwtVerifyMiddleware,
-  checkPermission('admin'),
+  checkPermission("admin"),
   userController.getAllUser
 );
 router.get("/users/:email", jwtVerifyMiddleware, userController.getUserByEmail);
@@ -24,7 +24,7 @@ router.post("/users", userController.createNewUser);
 router.put("/users/:id", jwtVerifyMiddleware, userController.updateUserById);
 
 // camp routes
-
+router.get("/camps/:id", campController.getCampById);
 router.get("/camps", campController.getAllCamp);
 router.post(
   "/camps",
