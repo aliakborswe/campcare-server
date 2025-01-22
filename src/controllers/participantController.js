@@ -1,4 +1,5 @@
 const participantModel = require("../models/ParticipantModel");
+const campModel = require("../models/CampModel");
 
 // create a new participant by email at one time 
 exports.createNewParticipant = async (req, res) => {
@@ -13,6 +14,10 @@ exports.createNewParticipant = async (req, res) => {
 
     // Create new participant
     const participant = await participantModel.create(req.body);
+    // Increment participant count in camp
+    await campModel.findByIdAndUpdate(campId, {
+      $inc: { participantCount: +1 },
+    });
 
     res.status(201).json({ message: "Participant registered successfully.", participant });
   } catch (error) {
