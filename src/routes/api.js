@@ -19,20 +19,18 @@ router.get(
   checkPermission('admin'),
   userController.getAllUser
 );
-router.get("/users/:email",jwtVerifyMiddleware, userController.getUserByEmail);
+router.get("/users/:email", jwtVerifyMiddleware, userController.getUserByEmail);
 router.post("/users", userController.createNewUser);
 router.put("/users/:id", jwtVerifyMiddleware, userController.updateUserById);
 
-// admin routes
-
 // camp routes
+
+router.get("/camps", campController.getAllCamp);
 router.post(
   "/camps",
   jwtVerifyMiddleware,
   checkPermission("admin"),
   campController.createCamp
 );
-
-
 
 module.exports = router;

@@ -2,7 +2,7 @@ const { mongoose, Schema } = require("mongoose");
 
 const userSchema = new Schema(
   {
-    name: { type: "string", required: true },
+    name: { type: "string" },
     email: {
       type: String,
       required: true,
@@ -10,13 +10,12 @@ const userSchema = new Schema(
       lowercase: true,
     },
     contact: {
-      type: Number,
-      required: true,
+      type: String,
+      default: "N/A",
     },
     image: {
       type: String,
-      default:
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+      default:"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
     },
     password: {
       type: String,
