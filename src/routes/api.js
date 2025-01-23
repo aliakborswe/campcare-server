@@ -31,6 +31,12 @@ router.post(
   checkPermission("admin"),
   campController.createCamp
 );
+router.put(
+  "/camps/:id",
+  jwtVerifyMiddleware,
+  checkPermission("admin"),
+  campController.updateCampById
+);
 router.delete(
   "/camps/:id",
   jwtVerifyMiddleware,

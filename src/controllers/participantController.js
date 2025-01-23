@@ -36,6 +36,7 @@ exports.getAllParticipantByEmail = async (req, res)=>{
     }
 }
 
+
 // delete participant by id
 exports.deleteParticipantById = async (req, res) => {
   const { id } = req.params;

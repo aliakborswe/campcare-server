@@ -54,6 +54,23 @@ exports.getTop6Camps = async (_req, res) => {
   }
 };
 
+// update camp by id
+exports.updateCampById = async (req, res) => {
+  const { id } = req.params;
+  const updatedCamp = req.body;
+  try {
+    const camp = await campModel.findByIdAndUpdate(id, updatedCamp, {
+      new: true,
+    });
+    if (!camp) {
+      return res.status(404).json({ error: "Camp not found" });
+    }
+    res.status(200).json(camp);
+  } catch (err) {
+    res.status(404).json({ error: err.message });
+  }
+};
+
 // delete camp by id
 exports.deleteCampById = async(req, res)=>{
   const { id } = req.params;
