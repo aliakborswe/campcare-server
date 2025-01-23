@@ -1,26 +1,32 @@
 const participantModel = require("../models/ParticipantModel");
 const campModel = require("../models/CampModel");
 
-// create a new participant by email at one time 
+// TODO: Implement the controller logic for participant-related operations
+// Create a new participant, ensuring they are not already registered for the same camp
 exports.createNewParticipant = async (req, res) => {
-  const { participantEmail, campId } = req.body;
-
-  try {
-    // Check if participant already exists
-    const existingParticipant = await participantModel.findOne({ participantEmail, campId });
-    if (existingParticipant) {
-      return res.status(400).json({ message: "Participant already registered for this camp." });
-    }
-
-    // Create new participant
-    const participant = await participantModel.create(req.body);
-    // Increment participant count in camp
-    await campModel.findByIdAndUpdate(campId, {
-      $inc: { participantCount: +1 },
-    });
-
-    res.status(201).json({ message: "Participant registered successfully.", participant });
-  } catch (error) {
-    res.status(500).json({ message: "Server error.", error });
+  const { campId } = req.body;
+  try{
+    // Create a new participant
+    const newParticipant = await participantModel.create(req.body);
+    // Update the camp's participant count
+    await campModel.findByIdAndUpdate(campId, { $inc: { participantCount: 1 } });
+    res.status(201).json(newParticipant, { message: "Participant created successfully" });
+  }
+  catch (err) {
+    res.status(404).json({ error: err.message });
   }
 };
+
+// Get all  participants by email with camp details
+exports.getAllParticipantByEmail = async (req, res)=>{
+    const email = req.query.email;
+    try {
+      const participants = await participantModel
+        .find({ participantEmail: email })
+        .populate("campId");
+        console.log(participants);
+      res.status(200).json(participants);
+    } catch (err) {
+      res.status(404).json({ error: err.message });
+    }
+}

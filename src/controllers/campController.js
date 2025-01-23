@@ -13,17 +13,11 @@ exports.createCamp = async (req, res) => {
 
 // get all Camps
 exports.getAllCamp = async (_req, res) => {
-    const limit = parseInt(_req.query?.limit);
-    const page = parseInt(_req.query?.page) || 1; // Default page to 1 if not provided
-    const skip = (page - 1) * limit;
   try {
     const camps = await campModel
       .find()
-      .sort({ createdAt: -1 }) // Sort by latest date
-      .skip(skip)
-      .limit(limit);
       if (!camps) {
-        return res.status(404).json({ error: "Post not found" });
+        return res.status(404).json({ error: "Camp not found" });
       }
     res.status(200).json(camps);
   } catch (err) {

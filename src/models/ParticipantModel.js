@@ -1,12 +1,7 @@
-const mongoose = require("mongoose");
+const { mongoose, Schema, Types } = require("mongoose");
 
-const ParticipantSchema = new mongoose.Schema(
+const ParticipantSchema = new Schema(
   {
-    campId: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-        ref: "camps",
-    },
     participantName: {
       type: String,
       required: true,
@@ -18,6 +13,11 @@ const ParticipantSchema = new mongoose.Schema(
       unique: true,
       lowercase: true,
       trim: true,
+    },
+    campId: {
+      type: Types.ObjectId,
+      ref: "camps",
+      required: true,
     },
     age: {
       type: String,

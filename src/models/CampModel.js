@@ -1,6 +1,6 @@
 const { mongoose, Schema } = require('mongoose')
 
-const CampSchema = new Schema(
+const campSchema = new Schema(
   {
     campName: {
       type: String,
@@ -49,6 +49,6 @@ const CampSchema = new Schema(
   { timestamps: true, versionKey: false }
 );
 
-const Camp = mongoose.model("Camps", CampSchema);
+const Camp = mongoose.model("camps", campSchema);
 
 module.exports = Camp;  
