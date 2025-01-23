@@ -44,5 +44,10 @@ router.post(
   jwtVerifyMiddleware,
   participantController.createNewParticipant
 );
+router.delete(
+  "/participants/:id",
+  jwtVerifyMiddleware,
+  participantController.deleteParticipantById
+);
 
 module.exports = router;

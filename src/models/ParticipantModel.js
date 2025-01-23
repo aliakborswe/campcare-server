@@ -10,7 +10,6 @@ const ParticipantSchema = new Schema(
     participantEmail: {
       type: String,
       required: true,
-      unique: true,
       lowercase: true,
       trim: true,
     },
