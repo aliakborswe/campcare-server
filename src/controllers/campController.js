@@ -53,3 +53,17 @@ exports.getTop6Camps = async (_req, res) => {
     res.status(404).json({ error: err.message });
   }
 };
+
+// delete camp by id
+exports.deleteCampById = async(req, res)=>{
+  const { id } = req.params;
+  try {
+    const deletedCamp = await campModel.findByIdAndDelete(id);
+    if (!deletedCamp) {
+      return res.status(404).json({ message: "Camp not found" });
+    }
+    res.status(200).json({ message: "Camp deleted successfully" });
+  } catch (err) {
+    res.status(404).json({ error: err.message });
+  }
+}

@@ -31,6 +31,12 @@ router.post(
   checkPermission("admin"),
   campController.createCamp
 );
+router.delete(
+  "/camps/:id",
+  jwtVerifyMiddleware,
+  checkPermission("admin"),
+  campController.deleteCampById
+);
 router.get("/topcamps", campController.getTop6Camps);
 
 // participant routes
