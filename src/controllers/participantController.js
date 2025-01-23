@@ -1,7 +1,6 @@
 const participantModel = require("../models/ParticipantModel");
 const campModel = require("../models/CampModel");
 
-// TODO: Implement the controller logic for participant-related operations
 // Create a new participant, ensuring they are not already registered for the same camp
 exports.createNewParticipant = async (req, res) => {
   const { campId } = req.body;
@@ -22,6 +21,17 @@ exports.createNewParticipant = async (req, res) => {
   }
 };
 
+// Get all participants with camp details
+exports.getAllParticipant = async (_req, res) => {
+  try {
+    const participants = await participantModel
+      .find()
+      .populate("campId");
+    res.status(200).json(participants);
+  } catch (err) {
+    res.status(404).json({ error: err.message });
+  }
+};
 
 // Get all  participants by email with camp details
 exports.getAllParticipantByEmail = async (req, res)=>{

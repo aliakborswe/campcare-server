@@ -51,6 +51,12 @@ router.get(
   jwtVerifyMiddleware,
   participantController.getAllParticipantByEmail
 );
+router.get(
+  "/participants",
+  jwtVerifyMiddleware,
+  checkPermission("admin"),
+  participantController.getAllParticipant
+);
 router.post(
   "/participants",
   jwtVerifyMiddleware,
