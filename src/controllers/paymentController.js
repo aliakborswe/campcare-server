@@ -20,7 +20,7 @@ exports.paymentIntentFunc = async (req, res) => {
       payment_method_types: ["card"],
     });
 
-    console.log("PaymentIntent Created: ", paymentIntent);
+    // console.log("PaymentIntent Created: ", paymentIntent);
 
     res.json(paymentIntent.client_secret );
   } catch (err) {
@@ -43,12 +43,12 @@ exports.paymentConfirmationFunc = async (req, res) => {
       .json({ success: false, message: "Invalid input data" });
   }
 
-  console.log("PaymentIntent Id from confirm Func: ", paymentIntentId);
+  // console.log("PaymentIntent Id from confirm Func: ", paymentIntentId);
 
   try {
     // Retrieve the PaymentIntent
     const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
-    console.log("PaymentIntent Retrieved: ", paymentIntent);
+    // console.log("PaymentIntent Retrieved: ", paymentIntent);
 
     if (paymentIntent.status === "succeeded") {
       // create payment history on db
@@ -73,7 +73,7 @@ exports.paymentConfirmationFunc = async (req, res) => {
           .json({ success: false, message: "Participant not found" });
       }
 
-      console.log("Participant Updated: ", updatedParticipant);
+      // console.log("Participant Updated: ", updatedParticipant);
     }
 
     res.json({ success: true, paymentIntent });

@@ -69,6 +69,12 @@ router.post(
   jwtVerifyMiddleware,
   participantController.createNewParticipant
 );
+router.patch(
+  "/participants/:id",
+  jwtVerifyMiddleware,
+  checkPermission("admin"),
+  participantController.updateConfirmationStatusById
+);
 router.delete(
   "/participants/:id",
   jwtVerifyMiddleware,

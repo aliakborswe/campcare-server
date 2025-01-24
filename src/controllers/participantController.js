@@ -21,12 +21,10 @@ exports.createNewParticipant = async (req, res) => {
     await campModel.findByIdAndUpdate(campId, {
       $inc: { participantCount: +1 },
     });
-    res
-      .status(201)
-      .json({
-        message: "Participant created successfully",
-        participant: newParticipant,
-      });
+    res.status(201).json({
+      message: "Participant created successfully",
+      participant: newParticipant,
+    });
   } catch (err) {
     res.status(404).json({ error: err.message });
   }
@@ -93,5 +91,28 @@ exports.getParticipantLength = async (_req, res) => {
     res.status(200).json(participants);
   } catch (err) {
     res.status(404).json({ error: err.message });
+  }
+};
+
+// update confirmationStatus by id
+exports.updateConfirmationStatusById = async (req, res) => {
+  const id = req.params.id;
+  const { confirmationStatus } = req.body;
+
+  try {
+    const updatedParticipant = await participantModel.findByIdAndUpdate(id, {
+      confirmationStatus,
+    });
+
+    if (!updatedParticipant) {
+      return res.status(404).json({ message: "Participant not found" });
+    }
+
+    res.status(200).json({
+      message: "Confirmation status updated successfully",
+      participant: updatedParticipant,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };
