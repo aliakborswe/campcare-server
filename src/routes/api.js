@@ -95,4 +95,10 @@ router.patch(
   paymentController.paymentConfirmationFunc
 );
 
+router.get(
+  "/payment-history",
+  jwtVerifyMiddleware,
+  paymentController.getPaymentHistoryByEmail
+);
+
 module.exports = router;

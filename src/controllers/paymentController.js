@@ -1,6 +1,42 @@
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const paymentModel = require("../models/PaymentModel");
 const participantModel = require("../models/ParticipantModel");
+const { populate } = require("dotenv");
+const { model } = require("mongoose");
+
+// get all Payment history by Email
+// get all Payment history by Email
+exports.getPaymentHistoryByEmail = async (req, res) => {
+  const email = req.query.email;
+
+  try {
+    const payments = await paymentModel
+      .find({ userEmail: email })
+      .populate({
+        path: "participantId",
+        populate: {
+          path: "campId", // Populate the campId field in the participant
+          model: "camps", // Reference the Camp model
+        },
+      });
+
+    const paymentHistory = payments.map((payment) => ({
+      id: payment._id,
+      campName: payment.participantId.campId.campName,
+      campFees: payment.participantId.campId.campFees,
+      paymentStatus: payment.participantId.paymentStatus,
+      confirmationStatus: payment.participantId.confirmationStatus,
+    }));
+
+    res.status(200).json(paymentHistory);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+
+
+
 
 // Create Payment Intent
 exports.paymentIntentFunc = async (req, res) => {
