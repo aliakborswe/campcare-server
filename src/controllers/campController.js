@@ -84,3 +84,13 @@ exports.deleteCampById = async(req, res)=>{
     res.status(404).json({ error: err.message });
   }
 }
+
+// get all camps length
+exports.getCampLength = async (_req, res) => {
+  try {
+    const camps = await campModel.countDocuments();
+    res.status(200).json(camps);
+  } catch (err) {
+    res.status(404).json({ error: err.message });
+  }
+};
