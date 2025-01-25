@@ -3,20 +3,22 @@ const express = require("express");
 const app = express();
 const router = require("./src/routes/api");
 const mongoose = require("mongoose");
-const cookieParser = require("cookie-parser");
+// const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
 // Middleware
 app.use(express.json());
 const originOption =
-  process.env.NODE_ENV === "production" ? " " : "http://localhost:5173";
+  process.env.NODE_ENV === "production"
+    ? "http://localhost:5173 "
+    : "http://localhost:5173";
 app.use(
   cors({
     origin: originOption,
     credentials: true,
   })
 );
-app.use(cookieParser());
+// app.use(cookieParser());
 
 // Routes
 app.get("/", (_req, res) => {

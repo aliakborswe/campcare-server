@@ -1,4 +1,5 @@
 const feedbackModel = require("../models/FeedbackModel")
+const userModel = require("../models/UserModel");
 
 // POST: Submit Feedback
 exports.createFeedback = async (req, res) => {
@@ -31,7 +32,19 @@ exports.createFeedback = async (req, res) => {
 exports.getAllFeedback = async (req, res) => {
   try {
     const feedbacks = await feedbackModel.find().sort({ createdAt: -1 }); // Sort by latest
-    res.status(200).json(feedbacks);
+
+    // Populate the user details for each feedback item
+    const feedbackWithUserDetails = await Promise.all(
+      feedbacks.map(async (feedback) => {
+        const user = await userModel.findOne({ email: feedback.userEmail });
+        return {
+          ...feedback.toObject(), 
+          userImage: user ? user.image : null, 
+        };
+      })
+    );
+
+    res.status(200).json(feedbackWithUserDetails);
   } catch (error) {
     res
       .status(500)
