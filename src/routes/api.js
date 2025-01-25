@@ -7,6 +7,7 @@ const userRoleController = require("../controllers/getUserRole");
 const campController = require("../controllers/campController");
 const participantController = require("../controllers/participantController");
 const paymentController = require("../controllers/paymentController")
+const feedbackController = require("../controllers/feedbackController")
 
 // auth routes
 router.post("/jwt", loginController.login);
@@ -100,5 +101,9 @@ router.get(
   jwtVerifyMiddleware,
   paymentController.getPaymentHistoryByEmail
 );
+
+// feedback route
+router.get("/feedback", feedbackController.getAllFeedback);
+router.post("/feedback", feedbackController.createFeedback);
 
 module.exports = router;
