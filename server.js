@@ -10,7 +10,7 @@ const cors = require("cors");
 app.use(express.json());
 const originOption =
   process.env.NODE_ENV === "production"
-    ? "http://localhost:5173 "
+    ? ["https://campcarepluse.netlify.app", "http://localhost:5173"]
     : "http://localhost:5173";
 app.use(
   cors({

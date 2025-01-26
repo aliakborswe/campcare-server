@@ -1,4 +1,3 @@
-const userModel = require("../models/UserModel");
 
 // verify is admin middleware
 const checkPermission = (...roles)=>{
