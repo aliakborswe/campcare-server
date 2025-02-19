@@ -13,6 +13,10 @@ const userSchema = new Schema(
       type: String,
       default: "N/A",
     },
+    address: {
+      type: String,
+      default: "N/A",
+    },
     profession: {
       type: String,
       default: "N/A",
