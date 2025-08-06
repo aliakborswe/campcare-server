@@ -14,11 +14,10 @@ exports.createCamp = async (req, res) => {
 // get all Camps
 exports.getAllCamp = async (_req, res) => {
   try {
-    const camps = await campModel
-      .find()
-      if (!camps) {
-        return res.status(404).json({ error: "Camp not found" });
-      }
+    const camps = await campModel.find();
+    if (!camps) {
+      return res.status(404).json({ error: "Camp not found" });
+    }
     res.status(200).json(camps);
   } catch (err) {
     res.status(404).json({ error: err.message });
@@ -37,9 +36,7 @@ exports.getCampById = async (req, res) => {
   } catch (err) {
     res.status(404).json({ error: err.message });
   }
-
-}
-
+};
 
 // GET camp to retrieve top 6 camps with highest participant count
 exports.getTop6Camps = async (_req, res) => {
@@ -72,7 +69,7 @@ exports.updateCampById = async (req, res) => {
 };
 
 // delete camp by id
-exports.deleteCampById = async(req, res)=>{
+exports.deleteCampById = async (req, res) => {
   const { id } = req.params;
   try {
     const deletedCamp = await campModel.findByIdAndDelete(id);
@@ -83,7 +80,7 @@ exports.deleteCampById = async(req, res)=>{
   } catch (err) {
     res.status(404).json({ error: err.message });
   }
-}
+};
 
 // get all camps length
 exports.getCampLength = async (_req, res) => {

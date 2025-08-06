@@ -3,7 +3,6 @@ const express = require("express");
 const app = express();
 const router = require("./src/routes/api");
 const mongoose = require("mongoose");
-// const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
 // Middleware
@@ -18,7 +17,6 @@ app.use(
     credentials: true,
   })
 );
-// app.use(cookieParser());
 
 // Routes
 app.get("/", (_req, res) => {

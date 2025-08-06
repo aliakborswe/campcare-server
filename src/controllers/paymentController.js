@@ -10,15 +10,13 @@ exports.getPaymentHistoryByEmail = async (req, res) => {
   const email = req.query.email;
 
   try {
-    const payments = await paymentModel
-      .find({ userEmail: email })
-      .populate({
-        path: "participantId",
-        populate: {
-          path: "campId", // Populate the campId field in the participant
-          model: "camps", // Reference the Camp model
-        },
-      });
+    const payments = await paymentModel.find({ userEmail: email }).populate({
+      path: "participantId",
+      populate: {
+        path: "campId", // Populate the campId field in the participant
+        model: "camps", // Reference the Camp model
+      },
+    });
 
     const paymentHistory = payments.map((payment) => ({
       id: payment._id,
@@ -34,15 +32,11 @@ exports.getPaymentHistoryByEmail = async (req, res) => {
   }
 };
 
-
-
-
-
 // Create Payment Intent
 exports.paymentIntentFunc = async (req, res) => {
-  const { amount, currency, } = req.body;
+  const { amount, currency } = req.body;
 
-  if (!amount || !currency ) {
+  if (!amount || !currency) {
     return res
       .status(400)
       .json({ success: false, message: "Invalid input data" });
@@ -58,15 +52,12 @@ exports.paymentIntentFunc = async (req, res) => {
 
     // console.log("PaymentIntent Created: ", paymentIntent);
 
-    res.json(paymentIntent.client_secret );
+    res.json(paymentIntent.client_secret);
   } catch (err) {
     console.error("Error creating PaymentIntent: ", err.message);
     res.status(500).json({ success: false, error: err.message });
   }
 };
-
-
-
 
 // Confirm Payment method: PATCH
 exports.paymentConfirmationFunc = async (req, res) => {
@@ -91,11 +82,11 @@ exports.paymentConfirmationFunc = async (req, res) => {
       const paymentHistory = {
         userEmail,
         participantId,
-        paymentIntentId
-      }
-      const history = await paymentModel.create(paymentHistory)
-      if(!history){
-        return res.status(304).json({ message: "Payment History not created" })
+        paymentIntentId,
+      };
+      const history = await paymentModel.create(paymentHistory);
+      if (!history) {
+        return res.status(304).json({ message: "Payment History not created" });
       }
       // Update the participant's payment status
       const updatedParticipant = await participantModel.findByIdAndUpdate(

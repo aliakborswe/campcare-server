@@ -1,4 +1,4 @@
-const { mongoose, Schema } = require('mongoose')
+const { mongoose, Schema } = require("mongoose");
 
 const campSchema = new Schema(
   {
@@ -20,9 +20,9 @@ const campSchema = new Schema(
       type: String,
       required: true,
     },
-    time:{
-        type: String,
-        required: true,
+    time: {
+      type: String,
+      required: true,
     },
     location: {
       type: String,
@@ -50,5 +50,4 @@ const campSchema = new Schema(
 );
 
 const Camp = mongoose.model("camps", campSchema);
-
-module.exports = Camp;  
+module.exports = Camp;

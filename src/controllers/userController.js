@@ -19,34 +19,34 @@ exports.getUserByEmail = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
     res.status(200).json(user);
-  }
-  catch (error) {
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
-}
+};
 
 // update user by id
 exports.updateUserById = async (req, res) => {
   const id = req.params.id;
   const updatedUser = req.body;
   try {
-    const user = await userModel.findByIdAndUpdate(id, updatedUser, { new: true });
+    const user = await userModel.findByIdAndUpdate(id, updatedUser, {
+      new: true,
+    });
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
     res.status(200).json(user);
-  }
-  catch (error) {
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
-}
+};
 
 // create a new user
-exports.createNewUser = async(req,res)=>{
+exports.createNewUser = async (req, res) => {
   const newUser = req.body;
-  const existingUser = await userModel.findOne({email: newUser.email});
-  if(existingUser){
-    return res.status(400).json({message: "User already exists"})
+  const existingUser = await userModel.findOne({ email: newUser.email });
+  if (existingUser) {
+    return res.status(400).json({ message: "User already exists" });
   }
   try {
     const user = await userModel.create(newUser);
@@ -54,5 +54,4 @@ exports.createNewUser = async(req,res)=>{
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-}
-
+};

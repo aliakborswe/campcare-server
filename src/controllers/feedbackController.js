@@ -1,4 +1,4 @@
-const feedbackModel = require("../models/FeedbackModel")
+const feedbackModel = require("../models/FeedbackModel");
 const userModel = require("../models/UserModel");
 
 // POST: Submit Feedback
@@ -38,8 +38,8 @@ exports.getAllFeedback = async (req, res) => {
       feedbacks.map(async (feedback) => {
         const user = await userModel.findOne({ email: feedback.userEmail });
         return {
-          ...feedback.toObject(), 
-          userImage: user ? user.image : null, 
+          ...feedback.toObject(),
+          userImage: user ? user.image : null,
         };
       })
     );

@@ -6,8 +6,8 @@ const checkPermission = require("../middlewares/checkPermission");
 const userRoleController = require("../controllers/getUserRole");
 const campController = require("../controllers/campController");
 const participantController = require("../controllers/participantController");
-const paymentController = require("../controllers/paymentController")
-const feedbackController = require("../controllers/feedbackController")
+const paymentController = require("../controllers/paymentController");
+const feedbackController = require("../controllers/feedbackController");
 
 // auth routes
 router.post("/jwt", loginController.login);

@@ -1,4 +1,4 @@
-# CampCare+ :   Medical Camp Management System (MCMS) - Backend
+# CampCare+ : Medical Camp Management System (MCMS) - Backend
 
 ## Overview
 
@@ -70,5 +70,3 @@ The backend of the Medical Camp Management System (MCMS) is built using Node.js,
 - **dotenv**: Manage environment variables securely.
 
 ---
-
-
